@@ -1,0 +1,15 @@
+.footer {
+  color: var(--mediumGrey);
+  max-width: 880px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 20px 0;
+}
+
+@media screen and (max-width: 880px) {
+  .footer {
+    max-width: 92vw;
+  }
+}

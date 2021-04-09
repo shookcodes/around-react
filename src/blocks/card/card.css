@@ -1,0 +1,29 @@
+@import url("./__title/card__title.css");
+@import url("./__image/card__image.css");
+@import url("./__content/card__content.css");
+@import url("./__like/card__like.css");
+@import url("./__like-text/card__like-text.css");
+
+.card {
+  max-width: 282px;
+  max-height: 362px;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+@media screen and (max-width: 880px) {
+  .card {
+    max-width: 380px;
+  }
+}
+
+@media screen and (max-width: 619px) {
+  .card {
+    min-width: 282px;
+  }
+}

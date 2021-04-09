@@ -1,0 +1,23 @@
+.btn_style_close-image {
+  background-color: rgba(0, 0, 0, 0);
+  background: url("../../../images/Close-Icon.svg") no-repeat center;
+  min-width: 40px;
+  min-height: 40px;
+  border: none;
+  font-size: 40px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+.btn_style_close-image:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 620px) {
+  .btn_style_close-image {
+    transform: scale(0.75);
+    top: -35px;
+    right: -35px;
+  }
+}

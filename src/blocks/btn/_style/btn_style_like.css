@@ -1,0 +1,16 @@
+.btn_style_like {
+  background-color: transparent;
+  background: url("../../../images/heart_white.svg") no-repeat;
+  min-width: 20.76px;
+  min-height: 18.13px;
+  padding: 0;
+  height: auto;
+  max-height: 25px;
+  font-size: 24px;
+  line-height: 30px;
+  border: none;
+}
+
+.btn_style_like:hover {
+  opacity: 0.5;
+}
