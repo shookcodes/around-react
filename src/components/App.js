@@ -1,155 +1,134 @@
-import React, {useState} from 'react'
-import Header from "./Header.js"
-import Main from "./Main.js"
-import Footer from "./Footer.js"
-import PopupWithForm from "./PopupWithForm.js"
-import ImagePopup from "./ImagePopup"
-import Input from "./Input.js"
-import "../index.css"
+import React, { useState } from "react";
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
+import PopupWithForm from "./PopupWithForm.js";
+import ImagePopup from "./ImagePopup";
+import Input from "./Input.js";
+import "../index.css";
 
-function App (props) {
+function App(props) {
+  const [isOpen, setIsOpen] = useState(false);
 
- const [isOpen, setIsOpen] = useState(false)
- const [name, setName] = useState(null)
- const [title, setTitle] = useState(null)
- const [placeholder, setPlaceholder] = useState(null)
- const [ariaLabel, setAriaLabel] = useState(null)
+  const [selectedCard, setSelectedCard] = useState({});
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
 
- const[selectedCard, setSelectedCard] = useState("")
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false)
 
-function handleCardClick(card) {
-  setSelectedCard(card)
-}
-
- function closeAllPopups() {
-  setIsOpen(false)
-  setSelectedCard("")
- }
-
-  function isEditAvatarPopupOpen () {
-    setTitle("Change profile picture")
-    setName("avatar")
-    setIsOpen(true)
-    setPlaceholder("Avatar URL")
-    setAriaLabel("Update avatar")
-
-
+  function handleCardClick(card) {
+    setSelectedCard(card);
   }
 
-  function EditAvatarInput() {
-    return (
-      <Input 
-       name="avatar"
-       class="avatar-image"
-       type="url"
-       placeholder="Avatar URL"
-       minLength="1" />
-    )
+  function closeAllPopups() {
+    setIsOpen(false);
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false)
+    setSelectedCard({ name: null, link: null });
   }
 
-  
   function handleEditAvatarClick() {
-    isEditAvatarPopupOpen();
-
-
-  }
-
-  function isEditProfilePopupOpen() {
-    setTitle("Edit profile")
-    setName("profile")
-    setIsOpen(true)
-    //setPlaceholder("Avatar URL")
-    setAriaLabel("Save Profile")
-  }
-
-  function EditProfileInputs() {
-    return (
-      <>
-      <Input 
-       name="user-name"
-       class="user-name"
-       type="text"
-       placeholder="Name"
-       minLength="2"
-       maxLength="40" />
-       <Input 
-       name="about-me"
-       class="about-me"
-       type="text"
-       placeholder="About Me"
-       minLength="2"
-       maxLength="200" />
-       </>
-    )
+    setEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    isEditProfilePopupOpen()
+    setEditProfilePopupOpen(true);
   }
 
-  function isAddPlacePopupOpen() {
-    setTitle("New Place")
-    setName("place")
-    setIsOpen(true)
-    setAriaLabel("Create Place")
-  }
 
-  function AddPlaceInputs() {
-    return (
-      <>
-      <Input 
-       name="place-name"
-       class="place-name"
-       type="text"
-       placeholder="Title"
-       minLength="1"
-       maxLength="30" />
-       <Input 
-       name="place-link"
-       class="place-link"
-       type="url"
-       placeholder="Image link"
-       />
-       </>
-    )
-  }
 
-  function SwitchCase() {
-    console.log(name)
-    switch(name) {
-      case "avatar": 
-        return <EditAvatarInput/>;
-        case "profile": 
-        return <EditProfileInputs/>
-        case "place": 
-        return <AddPlaceInputs/>
-      default:  return ""
-
-    }
-  }
 
   function handleAddPlaceClick() {
-    isAddPlacePopupOpen()
+    setAddPlacePopupOpen(true);
   }
-
 
   return (
     <div className="page">
-    <Header />
-    <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onCardClick={handleCardClick} />
-   <Footer />
-   <ImagePopup selectedCard={selectedCard} card={props.card} name={props.name} link={props.link} onClose={closeAllPopups} />
-   <PopupWithForm isOpen={isOpen} onClose={closeAllPopups} name={name} title={title} placeholder={placeholder} ariaLabel={ariaLabel} >
-   {isOpen ? <SwitchCase/> : null}
-   
-    </PopupWithForm>
+      <Header />
+      <Main
+        onEditAvatar={handleEditAvatarClick}
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onCardClick={handleCardClick}
+      />
+      <Footer />
+      <ImagePopup
+        selectedCard={selectedCard}
+        card={props.card}
+        name={props.name}
+        link={props.link}
+        onClose={closeAllPopups}
+      />
 
-
-
-  </div>
+      <PopupWithForm
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        name="avatar"
+        title="Change Profile Picture"
+        aria-label="Save profile picture"
+      >
+        <Input
+          name="avatar"
+          class="avatar-image"
+          type="url"
+          placeholder="Avatar URL"
+          aria-label="Edit avatar URL"
+          minLength="1"
+        />
+      </PopupWithForm>
+      <PopupWithForm
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        name="profile"
+        title="Edit Profile"
+        aria-label="Save profile"
+      >
+        <Input
+          name="user-name"
+          class="user-name"
+          type="text"
+          placeholder="Name"
+          minLength="2"
+          maxLength="40"
+          aria-label="User name"
+        />
+        <Input
+          name="about-me"
+          class="about-me"
+          type="text"
+          placeholder="About Me"
+          minLength="2"
+          maxLength="200"
+          aria-label="About me"
+        />
+      </PopupWithForm>
+      <PopupWithForm
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        name="place"
+        title="New Place"
+        aria-label="Save new place"
+      >
+           <Input
+          name="place-name"
+          class="place-name"
+          type="text"
+          placeholder="Title"
+          minLength="1"
+          maxLength="30"
+          aria-label="Place name"
+        />
+        <Input
+          name="place-link"
+          class="place-link"
+          type="url"
+          placeholder="Image link"
+          aria-label="Place URL"
+        />
+      </PopupWithForm>
+    </div>
   );
 }
-
-
 
 export default App;

@@ -1,7 +1,9 @@
 export default function ImagePopup (card) {
   const setCard = card.selectedCard
  
+  if (setCard.name && setCard.link !== "") {
     return (
+  
         <div className={`popup popup_style_image ${card.selectedCard ? 'popup_opened' : ''}`}>
         <div className="popup__image-container">
           <button className="btn btn_style_close btn_style_close-image" onClick={card.onClose}></button>
@@ -12,4 +14,5 @@ export default function ImagePopup (card) {
         </div>
       </div>
     )
+    } else return null
 }

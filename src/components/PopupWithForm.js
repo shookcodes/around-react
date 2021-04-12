@@ -7,7 +7,7 @@ return (
    <form className="popup__form" name={props.name} noValidate>
         <fieldset className="popup__fields">
           <button
-            className={`btn btn_style_close btn_style_close-popup`}
+            className="btn btn_style_close btn_style_close-popup"
             type="reset"
             aria-label={`Close ${props.name} modal`}
             onClick={props.onClose}
