@@ -1,49 +1,8 @@
-import React, { useState, setState, useEffect } from "react";
-import api from "../utils/Api.js";
+import React from "react";
 import Card from "./Card.js";
-
 import "../index.css";
 
 export default function Main(props) {
-  const [cards, setCards] = useState([]);
-
-  const getCardData = useEffect(() => {
-    api
-      .getCardList()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  Promise.all([getCardData]);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === props.id);
-    let updateLike = null;
-    
-    if (isLiked === false) {
-      updateLike = api.addCardLike(card._id);
-    } else {
-      updateLike = api.removeCardLike(card._id);
-    }
-    updateLike.then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
-  }
-
-  //const [newCards, setNewCards] = useState([...cards]);
-  //console.log(cards)
-
-  function handleDeleteClick(card) {
-    console.log("got here")
-    let index = cards.indexOf(card);
-   // console.log(newCards)
-    
-
-  }
-
   return (
     <>
       <section className="profile">
@@ -82,7 +41,7 @@ export default function Main(props) {
         ></button>
       </section>
       <section className="cards">
-        {cards.map((card) => (
+        {props.cards.map((card) => (
           <Card
             currentUser={props.id}
             card={card}
@@ -91,10 +50,8 @@ export default function Main(props) {
             name={card.name}
             selectedCard={props.card}
             onCardClick={props.onCardClick}
-            onCardLike={handleCardLike}
-            handleLikeClick={card.onCardLike}
-            onCardDelete={handleDeleteClick}
-            handleDeleteClick={card.onCardDelete}
+            onCardLike={props.onCardLike}
+            onCardDelete={props.onCardDelete}
           />
         ))}
       </section>

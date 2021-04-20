@@ -13,24 +13,26 @@ export default function Card(props) {
 
   const isOwn = props.currentUser === props.card.owner._id;
 
-  const cardDeleteButtonClassName = `btn btn_style_delete ${
-    isOwn ? "btn_style_delete-active" : ""
-  }`;
+  const cardDeleteButtonClassName = (
+    `btn btn_style_delete ${isOwn ? 'btn_style_delete-active' : ''}`
+  ); 
 
-  const isLiked = props.card.likes.some((i) => i._id === props.currentUser);
+  const isLiked = props.card.likes.some(i => i._id === props.currentUser);
 
-  // Create a variable which you then set in `className` for the like button
-  const cardLikeButtonClassName = `btn ${
-    isLiked ? "btn_style_like-active" : "btn_style_like"
-  }`;
+  
+
+// Create a variable which you then set in `className` for the like button
+const cardLikeButtonClassName = (`btn btn_style_like ${isLiked ? 'btn_style_like-active' : ''}`); 
+
 
   return (
     <div key={props.card._id} className="card">
+      
       <button
         className={cardDeleteButtonClassName}
         aria-label="Delete place"
         onClick={handleDeleteClick}
-      ></button>
+      ></button> 
       <div
         className="card__image"
         src="about:blank"
