@@ -6,7 +6,7 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import api from "../utils/Api";
+import api from "../utils/api";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import "../index.css";
@@ -14,7 +14,7 @@ import "../index.css";
 function App(props) {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
-  const getCardData = useEffect(() => {
+  useEffect(() => {
     api
       .getCardList()
       .then((data) => {
@@ -23,7 +23,6 @@ function App(props) {
       .catch((err) => console.log(err));
   }, []);
 
-  Promise.all([getCardData]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser.id);
@@ -37,7 +36,8 @@ function App(props) {
     updateLike.then((newCard) => {
       const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
       setCards(newCards);
-    });
+    })
+    .catch((err) => console.log(err));;
   }
 
   function handleDeleteClick(card) {
@@ -56,8 +56,7 @@ function App(props) {
     id: "",
   });
 
-  const [currentAvatar, setCurrentAvatar] = useState({ avatar: "" });
-  const [isOpen, setIsOpen] = useState(false);
+  const [, setIsOpen] = useState(false);
 
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -102,7 +101,6 @@ function App(props) {
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
-    console.log("hi");
   }
 
   function handleUpdateUser(user) {
@@ -111,7 +109,7 @@ function App(props) {
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
       })
-      .then(closeAllPopups())
+      .then(closeAllPopups)
       .catch((err) => console.log(err));
   }
 
@@ -121,14 +119,14 @@ function App(props) {
       .then((updatedAvatar) => {
         setCurrentUser(updatedAvatar);
       })
-      .then(closeAllPopups())
+      .then(closeAllPopups)
       .catch((err) => console.log(err));
   }
 
   function handleAddPlaceSubmit(data) {
     api.addCard(data)
     .then((newCard) => setCards([newCard, ...cards]))
-    .then(closeAllPopups())
+    .then(closeAllPopups)
     .catch((err) => console.log(err));
   }
 
@@ -137,10 +135,7 @@ function App(props) {
       <div className="page">
         <Header />
         <Main
-          id={currentUser.id}
-          name={currentUser.name}
-          about={currentUser.about}
-          avatar={currentUser.avatar}
+
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onCardClick={handleCardClick}

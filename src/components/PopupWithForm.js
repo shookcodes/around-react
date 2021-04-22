@@ -23,9 +23,7 @@ export default function PopupWithForm(props) {
           ></button>
 
           <h2 className="popup__title">{props.title}</h2>
-          <div className="popup__inputs">
-            {props.isOpen ? props.children : ""}
-          </div>
+          <div className="popup__inputs">{props.children}</div>
           <button
             className="btn btn_style_save"
             type="submit"

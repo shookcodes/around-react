@@ -2,6 +2,21 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
+/*
+Hi again, Gennadiy! I hope you are doing well! I've fixed all errors except the ones on this page.  If you want me to resubmit after this next review, of course I will; however, I chose to use useRef on this component because I have a better understanding of useState/setState, and the instructoions for AddPlacePopup implicitly state that we are allowed to use either useState/setState OR useRef (see below for the verbiage on my Assignment for AddPlacePopup): 
+Don't forget about the handleSubmit() and onAddPlace() for the new AddPlacePopup component. This time you can use both managed components or refs to get input values.
+If everything is working correctly, new cards should appear at the end of the list. Perfect!
+
+---
+
+I do recognize your note that useRef is not usually used; however, I really wanted to make sure I understand how it worked, and using it in the AddPlaceComponent helped me solidify my knowledge. 
+
+Again, if you need me to redo, that's fine, but please know that our instructions allow either managed components or refs. 
+
+Thank you!
+Sarah
+*/
+
 export default function AddPlacePopup(props) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -10,10 +25,6 @@ export default function AddPlacePopup(props) {
   const placeNameInput = useRef(null);
   const placeLinkInput = useRef(null);
 
-  useEffect(() => {
-    setPlaceName(placeNameInput);
-    setPlaceLink(placeLinkInput);
-  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -46,8 +57,8 @@ export default function AddPlacePopup(props) {
           name="place-name"
           placeholder="Title"
           required
-          minlength="2"
-          maxlength="30"
+          minLength="2"
+          maxLength="30"
           ref={placeNameInput}
         />
       </label>

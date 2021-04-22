@@ -21,13 +21,13 @@ export default function Main(props) {
           <div
             className="profile__avatar"
             alt="Profile picture"
-            style={{ backgroundImage: `url(${props.avatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           />
         </div>
         <div className="profile__info">
           <div className="profile__name-info">
             <h1 className="profile__name" id="name">
-              {props.name}
+              {currentUser.name}
             </h1>
             <button
               className="btn btn_style_edit-profile"
@@ -36,7 +36,7 @@ export default function Main(props) {
               onClick={props.onEditProfile}
             ></button>
           </div>
-          <p className="profile__title">{props.about}</p>
+          <p className="profile__title">{currentUser.about}</p>
         </div>
         <button
           className="btn btn_style_add"
