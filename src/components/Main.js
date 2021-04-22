@@ -21,7 +21,7 @@ export default function Main(props) {
           <div
             className="profile__avatar"
             alt="Profile picture"
-            style={{ backgroundImage: `url(${currentUser.avatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"  }}
           />
         </div>
         <div className="profile__info">
@@ -48,7 +48,6 @@ export default function Main(props) {
       <section className="cards">
         {props.cards.map((card) => (
           <Card
-            currentUser={props.id}
             card={card}
             key={card._id}
             link={card.link}

@@ -16,13 +16,13 @@ export default function Card(props) {
     props.onCardDelete(props.card);
   }
 
-  const isOwn = currentUser === props.card.owner._id;
+  const isOwn = currentUser.id === props.card.owner._id;
 
   const cardDeleteButtonClassName = (
     `btn btn_style_delete ${isOwn ? 'btn_style_delete-active' : ''}`
   ); 
 
-  const isLiked = props.card.likes.some(i => i._id === currentUser);
+  const isLiked = props.card.likes.some(i => i._id === currentUser.id);
   
 
 // Create a variable which you then set in `className` for the like button
