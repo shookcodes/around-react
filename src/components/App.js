@@ -53,7 +53,7 @@ function App(props) {
     name: "",
     about: "",
     avatar: "",
-    id: "",
+    _id: "",
   });
 
   const [, setIsOpen] = useState(false);
@@ -65,17 +65,9 @@ function App(props) {
   useEffect(() => {
     api
       .getUserInfo()
-      .then((user) => {
-        setCurrentUser(() => {
-          return {
-            name: user.name,
-            about: user.about,
-            avatar: user.avatar,
-            id: user._id,
-          };
-        });
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
       })
-
       .catch((err) => console.log(err));
   }, []);
 
