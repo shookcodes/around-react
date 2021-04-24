@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Card(props) {
@@ -18,25 +18,24 @@ export default function Card(props) {
 
   const isOwn = currentUser._id === props.card.owner._id;
 
-  const cardDeleteButtonClassName = (
-    `btn btn_style_delete ${isOwn ? 'btn_style_delete-active' : ''}`
-  ); 
+  const cardDeleteButtonClassName = `btn btn_style_delete ${
+    isOwn ? "btn_style_delete-active" : ""
+  }`;
 
-  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
-  
+  const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
 
-// Create a variable which you then set in `className` for the like button
-const cardLikeButtonClassName = (`btn btn_style_like ${isLiked ? 'btn_style_like-active' : ''}`); 
-
+  // Create a variable which you then set in `className` for the like button
+  const cardLikeButtonClassName = `btn btn_style_like ${
+    isLiked ? "btn_style_like-active" : ""
+  }`;
 
   return (
     <div className="card">
-      
       <button
         className={cardDeleteButtonClassName}
         aria-label="Delete place"
         onClick={handleDeleteClick}
-      ></button> 
+      ></button>
       <div
         className="card__image"
         style={{ backgroundImage: `url(${props.card.link})` }}

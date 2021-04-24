@@ -23,9 +23,8 @@ function App(props) {
       .catch((err) => console.log(err));
   }, []);
 
-
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser.id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     let updateLike = null;
 
     if (isLiked === false) {
@@ -33,11 +32,12 @@ function App(props) {
     } else {
       updateLike = api.removeCardLike(card._id);
     }
-    updateLike.then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    })
-    .catch((err) => console.log(err));;
+    updateLike
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleDeleteClick(card) {
@@ -116,10 +116,11 @@ function App(props) {
   }
 
   function handleAddPlaceSubmit(data) {
-    api.addCard(data)
-    .then((newCard) => setCards([newCard, ...cards]))
-    .then(closeAllPopups)
-    .catch((err) => console.log(err));
+    api
+      .addCard(data)
+      .then((newCard) => setCards([newCard, ...cards]))
+      .then(closeAllPopups)
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -127,7 +128,6 @@ function App(props) {
       <div className="page">
         <Header />
         <Main
-
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onCardClick={handleCardClick}
@@ -150,7 +150,7 @@ function App(props) {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-         <AddPlacePopup
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
@@ -160,7 +160,6 @@ function App(props) {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-       
       </div>
     </CurrentUserContext.Provider>
   );
